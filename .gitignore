@@ -12,6 +12,9 @@ target/
 *.iml
 *.ipr
 
+## Sensitive or high-churn files
+.idea/**/uiDesigner.xml
+
 ### Eclipse ###
 .apt_generated
 .classpath
