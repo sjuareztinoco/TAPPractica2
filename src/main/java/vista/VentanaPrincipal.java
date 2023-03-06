@@ -7,11 +7,11 @@ public class VentanaPrincipal extends JFrame {
     private JTabbedPane panelTabs;
     private PanelAgregarEspecialidad panelAgregarEspecialidad;
 
-    public VentanaPrincipal(){
+    public VentanaPrincipal(PanelAgregarEspecialidad panel1){
         super("Administrar escuela");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panelVistas);
-        panelAgregarEspecialidad = new PanelAgregarEspecialidad();
+        panelAgregarEspecialidad = panel1;
         panelTabs.add("Especialidad", panelAgregarEspecialidad);
     }
 
