@@ -1,5 +1,6 @@
 package controlador;
 
+import dao.DAOEspecialidad;
 import modelo.Especialidad;
 import vista.PanelAgregarEspecialidad;
 
@@ -24,8 +25,15 @@ public class ControladorEspecialidad implements ActionListener {
                     "CAMPOS VACIOS", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        modelo.setId(1);
         modelo.setNombre(nombre);
-        JOptionPane.showMessageDialog(vista,modelo.toString());
+        DAOEspecialidad daoEspecialidad = new DAOEspecialidad();
+        if (daoEspecialidad.agregar(modelo)) {
+            JOptionPane.showMessageDialog(vista,"Se agregó especialidad: " + nombre,
+                    "OPERACIÓN EXITOSA", JOptionPane.INFORMATION_MESSAGE);
+            vista.getCampoNombre().setText("");
+        } else {
+            JOptionPane.showMessageDialog(vista,"No se pudo agregar: " + nombre,
+                    "Ups!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
