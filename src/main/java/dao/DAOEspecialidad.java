@@ -3,9 +3,9 @@ package dao;
 import conexion.Conexion;
 import modelo.Especialidad;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAOEspecialidad implements DAOGeneral<Integer, Especialidad>{
     private final Conexion conexion;
@@ -46,7 +46,24 @@ public class DAOEspecialidad implements DAOGeneral<Integer, Especialidad>{
     }
 
     @Override
-    public Especialidad obtener(Integer id) {
-        return null;
+    public List<Especialidad> consultar() {
+        ArrayList<Especialidad> lista = new ArrayList<>();
+        String sql = "SELECT * FROM especialidad";
+        if(conexion.abrirConexion()) {
+            Connection con = conexion.obtenerConexion();
+            try {
+                Statement statement = con.createStatement();
+                ResultSet resultados = statement.executeQuery(sql);
+                while (resultados.next()) {
+                    Especialidad especialidad = new Especialidad();
+                    especialidad.setId(resultados.getInt("id"));
+                    especialidad.setNombre(resultados.getString("nombre"));
+                    lista.add(especialidad);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return lista.stream().toList();
     }
 }

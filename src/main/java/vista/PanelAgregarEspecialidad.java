@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelAgregarEspecialidad extends JPanel {
-    private final Especialidad especialidad;
+    private Especialidad especialidad;
     private JLabel titulo;
     private JLabel etiquetaNombre;
     private JTextField campoNombre;
@@ -19,8 +19,8 @@ public class PanelAgregarEspecialidad extends JPanel {
     private final int altoCampo = 30;
 
     public PanelAgregarEspecialidad(Especialidad especialidad){
-        this.initComponents();
         this.especialidad = especialidad;
+        this.initComponents();
     }
 
     private void initComponents() {
