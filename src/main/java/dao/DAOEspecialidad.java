@@ -29,20 +29,56 @@ public class DAOEspecialidad implements DAOGeneral<Integer, Especialidad>{
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
+            } finally {
+                conexion.cerrarConexion();
             }
         }
-        conexion.cerrarConexion();
         return estatus;
     }
 
     @Override
     public boolean eliminar(Integer id) {
-        return false;
+        boolean estatus = false;
+        String sql = "DELETE FROM especialidad WHERE id=?";
+        if(conexion.abrirConexion()) {
+            Connection con = conexion.obtenerConexion();
+            try {
+                PreparedStatement statement = con.prepareStatement(sql);
+                statement.setInt(1, id);
+                int filasAfectadas = statement.executeUpdate();
+                if (filasAfectadas > 0) {
+                    estatus = true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                conexion.cerrarConexion();
+            }
+        }
+        return estatus;
     }
 
     @Override
     public boolean actualizar(Integer id, Especialidad nuevoElemento) {
-        return false;
+        boolean estatus = false;
+        String sql = "UPDATE especialidad SET nombre=? WHERE id=?";
+        if(conexion.abrirConexion()) {
+            Connection con = conexion.obtenerConexion();
+            try {
+                PreparedStatement statement = con.prepareStatement(sql);
+                statement.setString(1, nuevoElemento.getNombre());
+                statement.setInt(2, id);
+                int filasAfectadas = statement.executeUpdate();
+                if (filasAfectadas > 0) {
+                    estatus = true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                conexion.cerrarConexion();
+            }
+        }
+        return estatus;
     }
 
     @Override
@@ -62,6 +98,8 @@ public class DAOEspecialidad implements DAOGeneral<Integer, Especialidad>{
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
+            } finally {
+                conexion.cerrarConexion();
             }
         }
         return lista.stream().toList();

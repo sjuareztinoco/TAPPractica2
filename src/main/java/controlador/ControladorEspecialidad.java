@@ -7,6 +7,7 @@ import vista.PanelAgregarEspecialidad;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ControladorEspecialidad implements ActionListener {
     private final Especialidad modelo;
@@ -19,6 +20,17 @@ public class ControladorEspecialidad implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String origen = e.getActionCommand();
+        switch (origen) {
+            case "agregar":
+                agregarEspecialidad();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + origen);
+        }
+    }
+
+    private void agregarEspecialidad() {
         String nombre = vista.getCampoNombre().getText().trim();
         if(nombre.isEmpty() || nombre.isBlank()) {
             JOptionPane.showMessageDialog(vista, "Llene el campo",

@@ -3,8 +3,12 @@ package vista;
 import controlador.ControladorEspecialidad;
 import modelo.Especialidad;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import static vista.ConstantesVistas.*;
 
 public class PanelAgregarEspecialidad extends JPanel {
     private Especialidad especialidad;
@@ -12,12 +16,6 @@ public class PanelAgregarEspecialidad extends JPanel {
     private JLabel etiquetaNombre;
     private JTextField campoNombre;
     private JButton botonAgregar;
-    private final int x = 100;
-    private final int y = 100;
-    private final int gapY = 5;
-    private final int anchoCampo = 250;
-    private final int altoCampo = 30;
-
     public PanelAgregarEspecialidad(Especialidad especialidad){
         this.especialidad = especialidad;
         this.initComponents();
@@ -27,23 +25,24 @@ public class PanelAgregarEspecialidad extends JPanel {
         this.setLayout(null);
         titulo = new JLabel("Agregar especialidad");
         titulo.setFont(new Font(Font.SANS_SERIF,Font.BOLD, 20));
-        titulo.setSize(anchoCampo, altoCampo);
-        titulo.setLocation(x + 50, y - 50);
+        titulo.setSize(ANCHO_CAMPO, ALTO_CAMPO);
+        titulo.setLocation(X + 40, Y - 50);
         add(titulo);
 
         etiquetaNombre = new JLabel("Nombre de la especialidad: ");
-        etiquetaNombre.setLocation(x,y);
-        etiquetaNombre.setSize(anchoCampo, altoCampo);
+        etiquetaNombre.setLocation(X,Y);
+        etiquetaNombre.setSize(ANCHO_CAMPO, ALTO_CAMPO);
         add(etiquetaNombre);
 
         campoNombre = new JTextField();
-        campoNombre.setLocation(x, y + altoCampo + gapY);
-        campoNombre.setSize(anchoCampo, altoCampo);
+        campoNombre.setLocation(X, Y + ALTO_CAMPO + GAP_Y);
+        campoNombre.setSize(ANCHO_CAMPO, ALTO_CAMPO);
         add(campoNombre);
 
         botonAgregar = new JButton("Agregar");
         botonAgregar.setSize(100,30);
-        botonAgregar.setLocation(x + 75, y + altoCampo * 2 + gapY * 5);
+        botonAgregar.setLocation(X + 75, Y + ALTO_CAMPO * 2 + GAP_Y * 2);
+        botonAgregar.setActionCommand("agregar");
         add(botonAgregar);
     }
 
